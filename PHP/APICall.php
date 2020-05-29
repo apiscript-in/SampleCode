@@ -27,7 +27,6 @@ class APICall {
         if ($httpCode != 200) {
             return array('isError' => true, 'response' => curl_error($curl));
         } else {
-            echo "<pre>" . htmlspecialchars($response) . "</pre>";
             return array('isError' => false, 'response' => $response);
         }
     }
