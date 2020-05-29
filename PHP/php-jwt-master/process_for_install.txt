@@ -1,0 +1,31 @@
+Install Composer-Setup.exe File on Windows
+
+
+After Open Command Line
+
+Go To php-jwt-master using command
+
+Write Command = composer require firebase/php-jwt:^1.0.0
+
+After Install Successfull
+
+
+Make Test.php
+
+
+require_once '../vendor/autoload.php';
+use \Firebase\JWT\JWT;
+
+$token = array (
+  'sub' => '1234567890',
+  'name' => 'John Doe',
+  'admin' => true,
+  'jti' => 'ea150242-7c05-437e-971c-b3fd9a088da4',
+  'iat' => 1521286730,
+  'exp' => 1521290330,
+);
+$jwt = JWT::encode($token, "wr2lomUOZ3");
+
+$decoded = JWT::decode($jwt, 'wr2lomUOZ3', array('HS256'));
+
+print_r($decoded);
