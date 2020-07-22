@@ -3,7 +3,7 @@
 class APICall {
 
     public function CallGetCustomerAPI() {
-        $url = 'http://staging.apiscript.in/get_customer';
+        $url = 'http://staging.apiscript.in/dmt/get_customer';
         $bodyParam = 'username=YourUsername&pwd=YourPwd&mobile_no=CustomerMobile&gateway=GW1&token=Token';
         return $this->ExecuteDMRAPIScriptApi($url, $bodyParam);
     }
