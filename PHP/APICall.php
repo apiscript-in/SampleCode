@@ -23,10 +23,12 @@ class APICall {
         ));
         $response = curl_exec($curl);
         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-        curl_close($curl);
         if ($httpCode != 200) {
-            return array('isError' => true, 'response' => curl_error($curl));
+            $error_message = curl_error($curl);
+            curl_close($curl);
+            return array('isError' => true, 'response' => $error_message);
         } else {
+            curl_close($curl);
             return array('isError' => false, 'response' => $response);
         }
     }
