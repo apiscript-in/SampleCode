@@ -29,8 +29,7 @@ class APICall {
             return array('isError' => true, 'response' => $error_message);
         } else {
             curl_close($curl);
-            return array('isError' => false, 'response' => $response);
+            return array('isError' => false, 'response' => $response,'array_data'=>json_decode($response, true));
         }
     }
-
 }
