@@ -109,6 +109,7 @@ class BusinessLogic {
                 echo $api_result['array_data']['message'];
             }
         }else{
+            echo $api_result['array_data']['message'];
             //display error message
         }
     }
@@ -228,6 +229,7 @@ class BusinessLogic {
                 }
             }
         }else{
+            echo $api_result['array_data']['message'];
             //display error message
         }
     }
