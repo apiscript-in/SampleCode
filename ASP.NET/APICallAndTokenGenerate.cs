@@ -232,7 +232,7 @@ public class APICallAndTokenGenerate
     {
         string token = getToken();
         string url = DMT_URL+"/fund_transfer";
-        string bodyParam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&mobile_no=" + mobile_no + "&sender_profile_id=" + sender_profile_id + "&beneficiary_id=" + beneficiary_id + "&amount=" + amount + "&transfer_mode=" + transfer_mode + "&&gateway=GW1&token=" + token;
+        string bodyParam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&mobile_no=" + mobile_no + "&sender_profile_id=" + sender_profile_id + "&beneficiary_id=" + beneficiary_id + "&amount=" + amount + "&transfer_mode=" + transfer_mode + "&gateway=GW1&token=" + token;
         string API_response = ExecuteDMRAPIScriptApi(url, bodyParam);
         GetTransactionStatusResponse objResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<GetTransactionStatusResponse>(API_response);
         return objResponse;
