@@ -214,6 +214,7 @@ class BusinessLogic {
             }
 
             if($api_result['array_data']['error_code'] == '0'){
+                $transaction_id = $api_result['array_data']['transaction_details']['transaction_id']; // Store transaction id in your db to know the status of transaction
                 if($api_result['array_data']['transaction_details']['status'] == 'Success'){
                     //successful transaction
                     echo $api_result['array_data']['message'];

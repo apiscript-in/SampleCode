@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
+namespace apiscript.dmt.api{
 public class APICallAndTokenGenerate
 {
     //For Staging Credential
@@ -265,7 +265,8 @@ public class APICallAndTokenGenerate
         }
         catch (Exception ex)
         {
-            return JsonSerializer.Serialize(new GetCommonResponse() { error_code = "1", message = ex.Message });
+            return System.Text.Json.JsonSerializer.Serialize(new GetCommonResponse() { error_code = "1", message = ex.Message });
         }
     }
+}
 }
