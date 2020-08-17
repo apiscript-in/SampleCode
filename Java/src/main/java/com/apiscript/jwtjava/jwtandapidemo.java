@@ -173,12 +173,12 @@ class jwtandapidemo {
             return objResponse;
         }
     }
-    public static DmtAPI.GetTransactionStatusResponse CallFundTransferAPI(String mobile_no,String sender_profile_id, String beneficiary_id, int amount, String transfer_mode) {
+    public static DmtAPI.GetTransactionStatusResponse CallFundTransferAPI(String mobile_no,String sender_profile_id, String beneficiary_id, int amount, String transfer_mode,long client_id) {
         DmtAPI.GetTransactionStatusResponse objResponse=new DmtAPI.GetTransactionStatusResponse();
         try {
             String token = getToken();
             String url = DMT_URL + "/fund_transfer";
-            String bodyparam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&mobile_no=" + mobile_no + "&sender_profile_id=" + sender_profile_id + "&beneficiary_id=" + beneficiary_id + "&amount=" + amount + "&transfer_mode=" + transfer_mode + "&gateway=GW1&token=" + token;
+            String bodyparam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&mobile_no=" + mobile_no + "&sender_profile_id=" + sender_profile_id + "&beneficiary_id=" + beneficiary_id + "&amount=" + amount + "&transfer_mode=" + transfer_mode + "&client_id="+client_id+"&gateway=GW1&token=" + token;
             String api_result = ExecuteDMRAPIScriptApi(url, bodyparam);
             ObjectMapper om = new ObjectMapper();
             objResponse = om.readValue(api_result, DmtAPI.GetTransactionStatusResponse.class);

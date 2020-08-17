@@ -228,11 +228,11 @@ public class APICallAndTokenGenerate
         return objResponse;
     }
 
-    public GetTransactionStatusResponse CallFundTransferAPI(string mobile_no, string sender_profile_id, string beneficiary_id, int amount, string transfer_mode = "IMPS")
+    public GetTransactionStatusResponse CallFundTransferAPI(string mobile_no, string sender_profile_id, string beneficiary_id, int amount, string transfer_mode = "IMPS",long client_id)
     {
         string token = getToken();
         string url = DMT_URL+"/fund_transfer";
-        string bodyParam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&mobile_no=" + mobile_no + "&sender_profile_id=" + sender_profile_id + "&beneficiary_id=" + beneficiary_id + "&amount=" + amount + "&transfer_mode=" + transfer_mode + "&gateway=GW1&token=" + token;
+        string bodyParam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&mobile_no=" + mobile_no + "&sender_profile_id=" + sender_profile_id + "&beneficiary_id=" + beneficiary_id + "&amount=" + amount + "&transfer_mode=" + transfer_mode + "&gateway=GW1&client_id="+client_id+"&token=" + token;
         string API_response = ExecuteDMRAPIScriptApi(url, bodyParam);
         GetTransactionStatusResponse objResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<GetTransactionStatusResponse>(API_response);
         return objResponse;

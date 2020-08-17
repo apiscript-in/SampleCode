@@ -75,11 +75,11 @@ class APICall {
         return $this->ExecuteDMRAPIScriptApi($url, $bodyParam);
     }
 
-    public function CallFundTransferAPI($mobile_no,$sender_profile_id,$beneficiary_id,$amount,$transfer_mode='IMPS') {
+    public function CallFundTransferAPI($mobile_no,$sender_profile_id,$beneficiary_id,$amount,$transfer_mode='IMPS',$client_id) {
         $jwt = new Jwt_model();
         $token = $jwt->get_jwt_token();
         $url = self::DMT_URL.'/fund_transfer';
-        $bodyParam = 'username='.self::API_USERNAME.'&pwd='.self::API_PASSWORD.'&mobile_no='.$mobile_no.'&sender_profile_id='.$sender_profile_id.'&beneficiary_id='.$beneficiary_id.'&amount='.$amount.'&transfer_mode='.$transfer_mode.'&gateway=GW1&token='.$token;
+        $bodyParam = 'username='.self::API_USERNAME.'&pwd='.self::API_PASSWORD.'&mobile_no='.$mobile_no.'&sender_profile_id='.$sender_profile_id.'&beneficiary_id='.$beneficiary_id.'&amount='.$amount.'&transfer_mode='.$transfer_mode.'&client_id='.$client_id.'&gateway=GW1&token='.$token;
         return $this->ExecuteDMRAPIScriptApi($url, $bodyParam);
     }
 
