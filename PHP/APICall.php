@@ -2,84 +2,102 @@
 require_once 'Jwt_model.php';
 class APICall {
     //For Staging Credential
-    const DMT_URL = 'http://staging.apiscript.in/dmt/';
-    const API_USERNAME = 'YourStagingAPIUserName';
-    const API_PASSWORD = 'YourStagingAPIPassword';
+    public $DMT_URL = 'http://staging.apiscript.in/dmt';
+    public $RECHARGE_URL = 'http://staging.apiscript.in/recharge';
+    public $API_USERNAME = 'YourStagingAPIUserName';
+    public $API_PASSWORD = 'YourStagingAPIPassword';
 
     //For Live Credential
-    //const DMT_URL = 'https://services.apiscript.in/dmt/';
-    //const self::API_USERNAME = 'YourLiveAPIUserName';
-    //const self::API_PASSWORD = 'YourLiveAPIPassword';
+    //public $DMT_URL = 'https://services.apiscript.in/dmt';
+    //public $RECHARGE_URL = 'https://services.apiscript.in/recharge';
+    //public $API_USERNAME = 'YourLiveAPIUserName';
+    //public $API_PASSWORD = 'YourLiveAPIPassword';
+
+    public function CallRechargeAPI($operatorcode,$number,$amount,$client_id,$account='',$auth='',$bill_verify_id='') {
+        $jwt = new Jwt_model();
+        $token = $jwt->get_jwt_token();
+        $url = $this->RECHARGE_URL.'/api';
+        $bodyParam = 'username='.$this->API_USERNAME.'&pwd='.$this->API_PASSWORD.'&operatorcode='.$operatorcode.'&number='.$number.'&amount='.$amount.'&client_id='.$client_id.'&account='.$account.'&auth='.$auth.'&bill_verify_id='.$bill_verify_id.'&token='.$token;
+        return $this->ExecuteDMRAPIScriptApi($url, $bodyParam);
+    }
+
+    public function CallCheckBillAPI($operatorcode,$number,$amount,$account='',$auth='') {
+        $jwt = new Jwt_model();
+        $token = $jwt->get_jwt_token();
+        $url = $this->RECHARGE_URL.'/check_bill';
+        $bodyParam = 'username='.$this->API_USERNAME.'&pwd='.$this->API_PASSWORD.'&operatorcode='.$operatorcode.'&number='.$number.'&amount='.$amount.'&account='.$account.'&auth='.$auth.'&token='.$token;
+        return $this->ExecuteDMRAPIScriptApi($url, $bodyParam);
+    }
 
     public function CallGetCustomerAPI($mobile_no) {
         $jwt = new Jwt_model();
         $token = $jwt->get_jwt_token();
-        $url = self::DMT_URL.'/get_customer';
-        $bodyParam = 'username='.self::API_USERNAME.'&pwd='.self::API_PASSWORD.'&mobile_no='.$mobile_no.'&gateway=GW1&token='.$token;
+        $url = $this->DMT_URL.'/get_customer';
+        $bodyParam = 'username='.$this->API_USERNAME.'&pwd='.$this->API_PASSWORD.'&mobile_no='.$mobile_no.'&gateway=GW1&token='.$token;
         return $this->ExecuteDMRAPIScriptApi($url, $bodyParam);
     }
 
     public function CallSenderRegistrationAPI($mobile_no,$fname,$lname,$pincode) {
         $jwt = new Jwt_model();
         $token = $jwt->get_jwt_token();
-        $url = self::DMT_URL.'/sender_registration';
-        $bodyParam = 'username='.self::API_USERNAME.'&pwd='.self::API_PASSWORD.'&mobile_no='.$mobile_no.'&fname='.$fname.'&lname='.$lname.'&pin='.$pincode.'&gateway=GW1&token='.$token;
+        $url = $this->DMT_URL.'/sender_registration';
+        $bodyParam = 'username='.$this->API_USERNAME.'&pwd='.$this->API_PASSWORD.'&mobile_no='.$mobile_no.'&fname='.$fname.'&lname='.$lname.'&pin='.$pincode.'&gateway=GW1&token='.$token;
         return $this->ExecuteDMRAPIScriptApi($url, $bodyParam);
     }
 
     public function CallSenderOTPAPI($mobile_no,$otp) {
         $jwt = new Jwt_model();
         $token = $jwt->get_jwt_token();
-        $url = self::DMT_URL.'/sender_otp';
-        $bodyParam = 'username='.self::API_USERNAME.'&pwd='.self::API_PASSWORD.'&mobile_no='.$mobile_no.'&gateway=GW1&otp='.$otp.'&token='.$token;
+        $url = $this->DMT_URL.'/sender_otp';
+        $bodyParam = 'username='.$this->API_USERNAME.'&pwd='.$this->API_PASSWORD.'&mobile_no='.$mobile_no.'&gateway=GW1&otp='.$otp.'&token='.$token;
         return $this->ExecuteDMRAPIScriptApi($url, $bodyParam);
     }
 
     public function CallBeneficiaryRegistrationAPI($mobile_no,$fname,$lname,$account_no,$ifsc_code,$sender_profile_id) {
         $jwt = new Jwt_model();
         $token = $jwt->get_jwt_token();
-        $url = self::DMT_URL.'/beneficiary_registration';
-        $bodyParam = 'username='.self::API_USERNAME.'&pwd='.self::API_PASSWORD.'&mobile_no='.$mobile_no.'&gateway=GW1&fname='.$fname.'&lname='.$lname.'&account_no='.$account_no.'&ifsc_code='.$ifsc_code.'&sender_profile_id='.$sender_profile_id.'&token='.$token;
+        $url = $this->DMT_URL.'/beneficiary_registration';
+        $bodyParam = 'username='.$this->API_USERNAME.'&pwd='.$this->API_PASSWORD.'&mobile_no='.$mobile_no.'&gateway=GW1&fname='.$fname.'&lname='.$lname.'&account_no='.$account_no.'&ifsc_code='.$ifsc_code.'&sender_profile_id='.$sender_profile_id.'&token='.$token;
         return $this->ExecuteDMRAPIScriptApi($url, $bodyParam);
     }
 
     public function CallBeneficiaryDeleteAPI($mobile_no,$sender_profile_id,$beneficiary_id) {
         $jwt = new Jwt_model();
         $token = $jwt->get_jwt_token();
-        $url = self::DMT_URL.'/beneficiary_delete';
-        $bodyParam = 'username='.self::API_USERNAME.'&pwd='.self::API_PASSWORD.'&mobile_no='.$mobile_no.'&sender_profile_id='.$sender_profile_id.'&beneficiary_id='.$beneficiary_id.'&gateway=GW1&token='.$token;
+        $url = $this->DMT_URL.'/beneficiary_delete';
+        $bodyParam = 'username='.$this->API_USERNAME.'&pwd='.$this->API_PASSWORD.'&mobile_no='.$mobile_no.'&sender_profile_id='.$sender_profile_id.'&beneficiary_id='.$beneficiary_id.'&gateway=GW1&token='.$token;
         return $this->ExecuteDMRAPIScriptApi($url, $bodyParam);
     }
 
     public function CallBeneficiaryDeleteValidationAPI($mobile_no,$sender_profile_id,$beneficiary_id,$otp) {
         $jwt = new Jwt_model();
         $token = $jwt->get_jwt_token();
-        $url = self::DMT_URL.'/beneficiary_delete_validation';
-        $bodyParam = 'username='.self::API_USERNAME.'&pwd='.self::API_PASSWORD.'&mobile_no='.$mobile_no.'&sender_profile_id='.$sender_profile_id.'&beneficiary_id='.$beneficiary_id.'&otp='.$otp.'&gateway=GW1&token='.$token;
+        $url = $this->DMT_URL.'/beneficiary_delete_validation';
+        $bodyParam = 'username='.$this->API_USERNAME.'&pwd='.$this->API_PASSWORD.'&mobile_no='.$mobile_no.'&sender_profile_id='.$sender_profile_id.'&beneficiary_id='.$beneficiary_id.'&otp='.$otp.'&gateway=GW1&token='.$token;
         return $this->ExecuteDMRAPIScriptApi($url, $bodyParam);
     }
 
     public function CallBeneficiaryAccountValidationAPI($mobile_no,$sender_profile_id,$beneficiary_id,$account_no,$ifsc_code,$client_id) {
         $jwt = new Jwt_model();
         $token = $jwt->get_jwt_token();
-        $url = self::DMT_URL.'/beneficiary_account_validation';
-        $bodyParam = 'username='.self::API_USERNAME.'&pwd='.self::API_PASSWORD.'&mobile_no='.$mobile_no.'&sender_profile_id='.$sender_profile_id.'&beneficiary_id='.$beneficiary_id.'&amount=1&account_no='.$account_no.'&ifsc_code='.$ifsc_code.'&client_id='.$client_id.'&gateway=GW1&token='.$token;
+        $url = $this->DMT_URL.'/beneficiary_account_validation';
+        $bodyParam = 'username='.$this->API_USERNAME.'&pwd='.$this->API_PASSWORD.'&mobile_no='.$mobile_no.'&sender_profile_id='.$sender_profile_id.'&beneficiary_id='.$beneficiary_id.'&amount=1&account_no='.$account_no.'&ifsc_code='.$ifsc_code.'&client_id='.$client_id.'&gateway=GW1&token='.$token;
         return $this->ExecuteDMRAPIScriptApi($url, $bodyParam);
     }
 
     public function CallTransactionStatusAPI($transaction_id) {
         $jwt = new Jwt_model();
         $token = $jwt->get_jwt_token();
-        $url = self::DMT_URL.'/get_transaction_status';
-        $bodyParam = 'username='.self::API_USERNAME.'&pwd='.self::API_PASSWORD.'&transaction_id='.$transaction_id.'&gateway=GW1&token='.$token;
+        $url = $this->DMT_URL.'/get_transaction_status';
+        $bodyParam = 'username='.$this->API_USERNAME.'&pwd='.$this->API_PASSWORD.'&transaction_id='.$transaction_id.'&gateway=GW1&token='.$token;
         return $this->ExecuteDMRAPIScriptApi($url, $bodyParam);
     }
 
     public function CallFundTransferAPI($mobile_no,$sender_profile_id,$beneficiary_id,$amount,$transfer_mode='IMPS',$client_id) {
         $jwt = new Jwt_model();
         $token = $jwt->get_jwt_token();
-        $url = self::DMT_URL.'/fund_transfer';
-        $bodyParam = 'username='.self::API_USERNAME.'&pwd='.self::API_PASSWORD.'&mobile_no='.$mobile_no.'&sender_profile_id='.$sender_profile_id.'&beneficiary_id='.$beneficiary_id.'&amount='.$amount.'&transfer_mode='.$transfer_mode.'&client_id='.$client_id.'&gateway=GW1&token='.$token;
+        $url = $this->DMT_URL.'/fund_transfer';
+        $bodyParam = 'username='.$this->API_USERNAME.'&pwd='.$this->API_PASSWORD.'&mobile_no='.$mobile_no.'&sender_profile_id='.$sender_profile_id.'&beneficiary_id='.$beneficiary_id.'&amount='.$amount.'&transfer_mode='.$transfer_mode.'&client_id='.$client_id.'&gateway=GW1&token='.$token;
         return $this->ExecuteDMRAPIScriptApi($url, $bodyParam);
     }
 
