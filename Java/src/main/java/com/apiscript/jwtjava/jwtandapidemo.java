@@ -18,12 +18,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 class jwtandapidemo {
 
     //For Staging Credential
-    private static String DMT_URL = "http://staging.apiscript.in/dmt/";
+    private static String DMT_URL = "http://staging.apiscript.in/dmt";
     private static String API_USERNAME = "YourStagingAPIUserName"; //Provide By APIScript Developer
     private static String API_PASSWORD = "YourStagingAPIPassword"; //Provide By APIScript Developer
 
     //For Live Credential
-    //private String DMT_URL="https://services.apiscript.in/dmt/";
+    //private String DMT_URL="https://services.apiscript.in/dmt";
     //private String API_USERNAME="YourLiveAPIUserName";
     //private String API_PASSWORD="YourLiveAPIPassword";
     //Sample method to construct a JWT

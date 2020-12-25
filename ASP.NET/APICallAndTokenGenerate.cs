@@ -15,11 +15,11 @@ namespace apiscript.dmt.api{
 public class APICallAndTokenGenerate
 {
     //For Staging Credential
-    public const string DMT_URL = "http://staging.apiscript.in/dmt/";
+    public const string DMT_URL = "http://staging.apiscript.in/dmt";
     public const string API_USERNAME = "YourStagingAPIUserName";
     public const string API_PASSWORD = "YourStagingAPIPassword";
     //For Live Credential
-    //public const string DMT_URL = "https://services.apiscript.in/dmt/";
+    //public const string DMT_URL = "https://services.apiscript.in/dmt";
     //public const string API_USERNAME = "YourLiveAPIUserName";
     //public const string API_PASSWORD = "YourLiveAPIPassword";
     public string getToken()
