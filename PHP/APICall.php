@@ -107,6 +107,7 @@ class APICall {
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HEADER => false,
+            CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded;charset=UTF-8'),
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_TIMEOUT => 90,
             CURLOPT_MAXREDIRS => 10,
