@@ -7,11 +7,9 @@ using System.Text;
 using JWT;
 using JWT.Algorithms;
 using JWT.Serializers;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-namespace apiscript.dmt.api{
+namespace apiscript.dtm.api{
 public class APICallAndTokenGenerate
 {
     //For Staging Credential
@@ -33,9 +31,10 @@ public class APICallAndTokenGenerate
             {
                 { "TimeStamp", now.ToUnixTimeSeconds().ToString() },
                 { "EmailID",  email_id }
-            };
+            }; 
+
             //Tranform it to Json object
-            string json_data = JsonConvert.SerializeObject(my_jsondata);
+                string json_data = JsonConvert.SerializeObject(my_jsondata);
             JObject json_object = JObject.Parse(json_data);
 
             var algorithm = new HMACSHA256Algorithm();
@@ -228,7 +227,7 @@ public class APICallAndTokenGenerate
         return objResponse;
     }
 
-    public GetTransactionStatusResponse CallFundTransferAPI(string mobile_no, string sender_profile_id, string beneficiary_id, int amount, string transfer_mode = "IMPS",long client_id)
+    public GetTransactionStatusResponse CallFundTransferAPI(string mobile_no, string sender_profile_id, string beneficiary_id, int amount, long client_id,string transfer_mode = "IMPS")
     {
         string token = getToken();
         string url = DMT_URL+"/fund_transfer";

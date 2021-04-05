@@ -7,11 +7,9 @@ using System.Text;
 using JWT;
 using JWT.Algorithms;
 using JWT.Serializers;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using apiscript.dmt.api;
+using apiscript.dtm.api;
 public class BusinessLogic
 {
     public void _CallGetCustomerAPI(string mobile_no)
@@ -186,10 +184,10 @@ public class BusinessLogic
 
         }
     }
-    public void _CallFundTransferAPI(string mobile_no, string sender_profile_id, string beneficiary_id, string account_no, int amount, string transfer_mode="IMPS",long client_id)
+    public void _CallFundTransferAPI(string mobile_no, string sender_profile_id, string beneficiary_id, string account_no, int amount, long client_id, string transfer_mode="IMPS")
     {
         APICallAndTokenGenerate objAPI = new APICallAndTokenGenerate();
-        APICallAndTokenGenerate.GetTransactionStatusResponse objResponse = objAPI.CallFundTransferAPI(mobile_no,sender_profile_id,beneficiary_id,amount,transfer_mode,client_id);
+        APICallAndTokenGenerate.GetTransactionStatusResponse objResponse = objAPI.CallFundTransferAPI(mobile_no,sender_profile_id,beneficiary_id,amount,client_id, transfer_mode);
         if (objResponse.error_code.Equals("1"))
         {
             //Transaction is failure
