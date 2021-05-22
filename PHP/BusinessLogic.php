@@ -206,7 +206,7 @@ class BusinessLogic {
 
     public function _CallFundTransferAPI($mobile_no,$sender_profile_id,$beneficiary_id,$amount,$transfer_mode='IMPS',$client_id) {
         $api = new APICall();
-        $api_result = $api->CallFundTransferAPI($$mobile_no,$sender_profile_id,$beneficiary_id,$amount,$client_id);
+        $api_result = $api->CallFundTransferAPI($mobile_no,$sender_profile_id,$beneficiary_id,$amount,$transfer_mode,$client_id);
         if(!$api_result['isError']){
             if($api_result['array_data']['error_code'] == '1'){
                 //Transaction is failure
