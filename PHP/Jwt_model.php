@@ -22,5 +22,4 @@ class Jwt_model {
         }
     }
 }
-
 ?>
