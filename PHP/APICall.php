@@ -11,8 +11,8 @@ class APICall {
     //For Live Credential
     public $DMT_URL = 'https://dmt.apiscript.in';
     //public $RECHARGE_URL = 'https://services.apiscript.in/recharge';
-    public $API_USERNAME = 'PWIGU138805';
-    public $API_PASSWORD = '123456';
+    public $API_USERNAME = 'YourUserName';
+    public $API_PASSWORD = 'YourPassword';
 
     public function CallRechargeAPI($operatorcode,$number,$amount,$client_id,$account='',$auth='',$bill_verify_id='') {
         $jwt = new Jwt_model();
