@@ -10,16 +10,15 @@ class Jwt_model {
         return JWT::decode($token, $secret_key, array('HS256'));
     }
     public function get_jwt_token() {
-        $secret_key = '';//Pass Secret Key Here
-        $email_id = 'yourregisteremail@gmail.com';
+        $secret_key = '2509-5b9602a1bc774-946180';//Pass Secret Key Here -> Share on Client Register Email Id
+        $email_id = 'info@apiscript.in';
         $ObjDate = new DateTime();
         $current_time_stamp = $ObjDate->getTimestamp();
-        $token = '{"TimeStamp":"' . $current_time_stamp . '","EmailID":"'.$email_id.'"}';
+        $token = array("TimeStamp"=>(string)$current_time_stamp,"EmailID"=>$email_id);
         try {
-           return $enc_token = $this->get_encode_token($token, $secret_key);
+           return $this->get_encode_token($token, $secret_key);
         } catch (Exception $ex) {
             return $ex->getMessage();
         }
     }
 }
-?>

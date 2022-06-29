@@ -152,7 +152,7 @@ public class BusinessLogic {
     }
      public void _CallTransactionStatusAPI(String mobile_no, String sender_profile_id, String beneficiary_id, String account_no, int amount, String transfer_mode,long client_id)
     {
-        DmtAPI.GetTransactionStatusResponse objResponse = jwtandapidemo.CallFundTransferAPI(mobile_no,sender_profile_id,beneficiary_id,amount,transfer_mode,client_id);
+        DmtAPI.GetTransactionStatusResponse objResponse = jwtandapidemo.CallFundTransferAPI(mobile_no,sender_profile_id,beneficiary_id,amount,client_id,account_no,transfer_mode);
         if (objResponse.getError_code().equals("1")) {
             //print objResponse.getMessage();
             //display error message

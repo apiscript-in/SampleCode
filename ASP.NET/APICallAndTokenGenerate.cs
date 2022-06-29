@@ -12,14 +12,16 @@ using Newtonsoft.Json.Linq;
 namespace apiscript.dtm.api{
 public class APICallAndTokenGenerate
 {
+    public const string API_GATEWAY = "GW2";
     //For Staging Credential
     public const string DMT_URL = "http://staging.apiscript.in/dmt";
     public const string API_USERNAME = "YourStagingAPIUserName";
     public const string API_PASSWORD = "YourStagingAPIPassword";
     //For Live Credential
-    //public const string DMT_URL = "https://services.apiscript.in/dmt";
+    //public const string DMT_URL = "https://dmt.apiscript.in";
     //public const string API_USERNAME = "YourLiveAPIUserName";
     //public const string API_PASSWORD = "YourLiveAPIPassword";
+
     public string getToken()
     {
         string email_id = "Your Register EmailID";
@@ -84,19 +86,6 @@ public class APICallAndTokenGenerate
         public string beneficiary_status { get; set; }
     }
 
-    public class Sender_Beneficiary
-    {
-        public string beneficiary_id { get; set; }
-        public string beneficiary_name { get; set; }
-        public string bank_name { get; set; }
-        public string ifsc_code { get; set; }
-        public string account_no { get; set; }
-        public string imps_status { get; set; }
-        public string neft_status { get; set; }
-        public string is_verify { get; set; }
-        public string beneficiary_status { get; set; }
-    }
-
     public class GetSenderRegistrationResponse
     {
         public string message { get; set; }
@@ -108,7 +97,7 @@ public class APICallAndTokenGenerate
     {
         public string message { get; set; }
         public Sender_Data sender_data { get; set; }
-        public Sender_Beneficiary[] sender_beneficiary { get; set; }
+        public Sender_Beneficiaries[] sender_beneficiary { get; set; }
         public string error_code { get; set; }
     }
 
@@ -151,7 +140,7 @@ public class APICallAndTokenGenerate
     {
         string token = getToken();
         string url = DMT_URL+"/get_customer";
-        string bodyParam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&mobile_no=" + mobile_no + "&gateway=GW1&token=" + token;
+        string bodyParam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&mobile_no=" + mobile_no + "&gateway="+API_GATEWAY+"&token=" + token;
         string API_response = ExecuteDMRAPIScriptApi(url, bodyParam);
         GetCustomerResponse objResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<GetCustomerResponse>(API_response);
         return objResponse;
@@ -161,7 +150,7 @@ public class APICallAndTokenGenerate
     {
         string token = getToken();
         string url = DMT_URL+"/sender_registration";
-        string bodyParam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&mobile_no=" + mobile_no + "&fname=" + fname + "&lname=" + lname + "&pin=" + pincode + "&gateway=GW1&token=" + token;
+        string bodyParam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&mobile_no=" + mobile_no + "&fname=" + fname + "&lname=" + lname + "&pin=" + pincode + "&gateway="+API_GATEWAY+"&token=" + token;
         string API_response = ExecuteDMRAPIScriptApi(url, bodyParam);
         GetSenderRegistrationResponse objResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<GetSenderRegistrationResponse>(API_response);
         return objResponse;
@@ -171,7 +160,7 @@ public class APICallAndTokenGenerate
     {
         string token = getToken();
         string url = DMT_URL+"/sender_otp";
-        string bodyParam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&mobile_no=" + mobile_no + "&otp=" + otp + "&gateway=GW1&token=" + token;
+        string bodyParam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&mobile_no=" + mobile_no + "&otp=" + otp + "&gateway="+API_GATEWAY+"&token=" + token;
         string API_response = ExecuteDMRAPIScriptApi(url, bodyParam);
         GetCommonResponse objResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<GetCommonResponse>(API_response);
         return objResponse;
@@ -181,7 +170,7 @@ public class APICallAndTokenGenerate
     {
         string token = getToken();
         string url = DMT_URL+"/beneficiary_registration";
-        string bodyParam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&mobile_no=" + mobile_no + "&gateway=GW1&fname=" + fname + "&lname=" + lname + "&account_no=" + account_no + "&ifsc_code=" + ifsc_code + "&sender_profile_id=" + sender_profile_id + "&token=" + token;
+        string bodyParam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&mobile_no=" + mobile_no + "&gateway="+API_GATEWAY+"&fname=" + fname + "&lname=" + lname + "&account_no=" + account_no + "&ifsc_code=" + ifsc_code + "&sender_profile_id=" + sender_profile_id + "&token=" + token;
         string API_response = ExecuteDMRAPIScriptApi(url, bodyParam);
         GetBeneficiaryRegistrationResponse objResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<GetBeneficiaryRegistrationResponse>(API_response);
         return objResponse;
@@ -191,7 +180,7 @@ public class APICallAndTokenGenerate
     {
         string token = getToken();
         string url = DMT_URL+"/beneficiary_delete";
-        string bodyParam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&mobile_no=" + mobile_no + "&sender_profile_id=" + sender_profile_id + "&beneficiary_id=" + beneficiary_id + "&gateway=GW1&token=" + token;
+        string bodyParam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&mobile_no=" + mobile_no + "&sender_profile_id=" + sender_profile_id + "&beneficiary_id=" + beneficiary_id + "&gateway="+API_GATEWAY+"&token=" + token;
         string API_response = ExecuteDMRAPIScriptApi(url, bodyParam);
         GetCommonResponse objResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<GetCommonResponse>(API_response);
         return objResponse;
@@ -201,7 +190,7 @@ public class APICallAndTokenGenerate
     {
         string token = getToken();
         string url = DMT_URL+"/beneficiary_delete_validation";
-        string bodyParam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&mobile_no=" + mobile_no + "&sender_profile_id=" + sender_profile_id + "&beneficiary_id=" + beneficiary_id + "&otp=" + otp + "&gateway=GW1&token=" + token;
+        string bodyParam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&mobile_no=" + mobile_no + "&sender_profile_id=" + sender_profile_id + "&beneficiary_id=" + beneficiary_id + "&otp=" + otp + "&gateway="+API_GATEWAY+"&token=" + token;
         string API_response = ExecuteDMRAPIScriptApi(url, bodyParam);
         GetCommonResponse objResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<GetCommonResponse>(API_response);
         return objResponse;
@@ -211,7 +200,7 @@ public class APICallAndTokenGenerate
     {
         string token = getToken();
         string url = DMT_URL+"/beneficiary_account_validation";
-        string bodyParam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&mobile_no=" + mobile_no + "&sender_profile_id=" + sender_profile_id + "&beneficiary_id=" + beneficiary_id + "&amount=1&account_no=" + account_no + "&ifsc_code=" + ifsc_code + "&client_id=" + client_id + "&gateway=GW1&token=" + token;
+        string bodyParam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&mobile_no=" + mobile_no + "&sender_profile_id=" + sender_profile_id + "&beneficiary_id=" + beneficiary_id + "&amount=1&account_no=" + account_no + "&ifsc_code=" + ifsc_code + "&client_id=" + client_id + "&gateway="+API_GATEWAY+"&token=" + token;
         string API_response = ExecuteDMRAPIScriptApi(url, bodyParam);
         GetBeneficiaryAccountValidationResponse objResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<GetBeneficiaryAccountValidationResponse>(API_response);
         return objResponse;
@@ -221,17 +210,17 @@ public class APICallAndTokenGenerate
     {
         string token = getToken();
         string url = DMT_URL+"/get_transaction_status";
-        string bodyParam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&transaction_id=" + transaction_id + "&gateway=GW1&token=" + token;
+        string bodyParam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&transaction_id=" + transaction_id + "&gateway="+API_GATEWAY+"&token=" + token;
         string API_response = ExecuteDMRAPIScriptApi(url, bodyParam);
         GetTransactionStatusResponse objResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<GetTransactionStatusResponse>(API_response);
         return objResponse;
     }
 
-    public GetTransactionStatusResponse CallFundTransferAPI(string mobile_no, string sender_profile_id, string beneficiary_id, int amount, long client_id,string transfer_mode = "IMPS")
+    public GetTransactionStatusResponse CallFundTransferAPI(string mobile_no, string sender_profile_id, string beneficiary_id, int amount, long client_id,string account_no,string transfer_mode = "IMPS")
     {
         string token = getToken();
         string url = DMT_URL+"/fund_transfer";
-        string bodyParam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&mobile_no=" + mobile_no + "&sender_profile_id=" + sender_profile_id + "&beneficiary_id=" + beneficiary_id + "&amount=" + amount + "&transfer_mode=" + transfer_mode + "&gateway=GW1&client_id="+client_id+"&token=" + token;
+        string bodyParam = "username=" + API_USERNAME + "&pwd=" + API_PASSWORD + "&mobile_no=" + mobile_no + "&sender_profile_id=" + sender_profile_id + "&beneficiary_id=" + beneficiary_id + "&amount=" + amount + "&account_no=" + account_no + "&transfer_mode=" + transfer_mode + "&gateway="+API_GATEWAY+"&client_id="+client_id+"&token=" + token;
         string API_response = ExecuteDMRAPIScriptApi(url, bodyParam);
         GetTransactionStatusResponse objResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<GetTransactionStatusResponse>(API_response);
         return objResponse;

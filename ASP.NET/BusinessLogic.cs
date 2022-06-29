@@ -187,7 +187,7 @@ public class BusinessLogic
     public void _CallFundTransferAPI(string mobile_no, string sender_profile_id, string beneficiary_id, string account_no, int amount, long client_id, string transfer_mode="IMPS")
     {
         APICallAndTokenGenerate objAPI = new APICallAndTokenGenerate();
-        APICallAndTokenGenerate.GetTransactionStatusResponse objResponse = objAPI.CallFundTransferAPI(mobile_no,sender_profile_id,beneficiary_id,amount,client_id, transfer_mode);
+        APICallAndTokenGenerate.GetTransactionStatusResponse objResponse = objAPI.CallFundTransferAPI(mobile_no,sender_profile_id,beneficiary_id,amount,client_id,account_no, transfer_mode);
         if (objResponse.error_code.Equals("1"))
         {
             //Transaction is failure
